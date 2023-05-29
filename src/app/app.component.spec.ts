@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'ng-mdbootstrap-starter-kit'`, () => {
+  it(`should have as title 'exam-template-ui'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('ng-mdbootstrap-starter-kit');
+    expect(app.title).toEqual('exam-template-ui');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('ng-mdbootstrap-starter-kit app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('exam-template-ui app is running!');
   });
 });

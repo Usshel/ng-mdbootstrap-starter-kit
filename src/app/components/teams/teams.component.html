@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-11 col-xl-10">
+      <div class="page-header">
+        <page-header-presentational
+          [title]="'Teams'"
+          [description]="'You can browse through teams below'"
+        >
+        </page-header-presentational>
+      </div>
+
+      <!-- start of card component -->
+      <div class="content-list-body row filter-list-1685378888553">
+        <ng-container *ngFor="let team of teams$ | async">
+          <simple-card-presentational
+            class="col-lg-6"
+            [title]="team.name"
+            [description]="
+              (team.projects | length) +
+              ' Projects, ' +
+              (team.members | length) +
+              ' Members'
+            "
+          >
+          </simple-card-presentational>
+        </ng-container>
+      </div>
+      <!-- end of card component  -->
+    </div>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<page-header-presentational
+  [title]="'Projects'"
+  [description]="'You can browse through projects below'"
+>
+</page-header-presentational>
+
+<!-- start of card component -->
+<div class="content-list-body row filter-list-1685378888553">
+  <ng-container *ngFor="let project of projects$ | async">
+    <simple-card-presentational
+      class="col-lg-6"
+      [title]="project.name"
+      [description]="'Due on ' + (project.dueDate | date)"
+    >
+      <ng-content progressbar> </ng-content>
+    </simple-card-presentational>
+  </ng-container>
+</div>
+<!-- end of card component  -->
