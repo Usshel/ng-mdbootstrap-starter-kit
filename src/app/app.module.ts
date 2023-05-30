@@ -7,20 +7,17 @@ import { HeaderPresentationalComponentModule } from './presentational-components
 import { HttpClientModule } from '@angular/common/http';
 import { LengthPipeModule } from './pipes/length/length.pipe-module';
 
-
 @NgModule({
-    declarations: [
-        AppComponent
-    ],
-    providers: [],
-    bootstrap: [AppComponent],
-    imports: [
-        HttpClientModule,
-        BrowserModule,
-        AppRoutingModule,
-        NavbarSidePresentationalComponentModule,
-        HeaderPresentationalComponentModule,
-        LengthPipeModule,
-    ]
+  declarations: [AppComponent],
+  providers: [],
+  bootstrap: [AppComponent],
+  imports: [
+    HttpClientModule,
+    BrowserModule,
+    AppRoutingModule,
+    NavbarSidePresentationalComponentModule,
+    HeaderPresentationalComponentModule,
+    LengthPipeModule,
+  ],
 })
-export class AppModule { }
+export class AppModule {}
