@@ -14,21 +14,26 @@ export class ProgressBarDirective {
   private _progressBarNotDefault: boolean = false;
   @Input() set progressBarNotDefault(value: boolean) {
     this._progressBarNotDefault = value;
-    if (this._progressBarNotDefault && this._progressBarState < 33.33333) {
-      this._renderer2.addClass(this._elementRef.nativeElement, `bg-danger`);
-    } else if (
-      this._progressBarNotDefault &&
-      this._progressBarState < 66.66666
-    ) {
-      this._renderer2.addClass(this._elementRef.nativeElement, `bg-warning`);
-    } else if (
-      this._progressBarNotDefault &&
-      this._progressBarState > 66.66666
-    ) {
-      this._renderer2.addClass(this._elementRef.nativeElement, `bg-success`);
-    } else {
-      this._renderer2.addClass(this._elementRef.nativeElement, `bg-primary`);
-    }
+    const progressBarClasses = {
+      0: 'bg-danger',
+      33.33333: 'bg-warning',
+      66.66666: 'bg-success',
+    };
+
+    const progressBarClass = Object.entries(progressBarClasses).reduce(
+      (defaultClass, [percentage, className]) => {
+        if (
+          this._progressBarNotDefault &&
+          this._progressBarState > Number(percentage)
+        ) {
+          return className;
+        }
+        return defaultClass;
+      },
+      'big-primary'
+    );
+
+    this._renderer2.addClass(this._elementRef.nativeElement, progressBarClass);
   }
   constructor(private _elementRef: ElementRef, private _renderer2: Renderer2) {}
 }
