@@ -5,8 +5,6 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { BehaviorSubject, Observable, map } from 'rxjs';
-import { MembersModel } from 'src/app/models/members.model';
-import { PersonViewModel } from 'src/app/view-models/person/person.view-model';
 
 @Component({
   selector: 'img-overlap-list-presentational',
@@ -16,20 +14,15 @@ import { PersonViewModel } from 'src/app/view-models/person/person.view-model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ImgOverlapListPresentationalComponent {
-  private _persons!: PersonViewModel[];
-  @Input() set persons(value: MembersModel[]) {
-    this._persons! = value.map((member) => ({
-      id: member.id,
-      name: member.firstName,
-      imageUrl: member.avatarUrl,
-      secondName: member.lastName,
-      position: member.position,
-    }));
-    this._personSubject.next(this._persons);
+  private _imageUrl!: string;
+  @Input() set imageUrl(value: string) {
+    this._imageUrl = value;
+    this._imageUrlSubject.next(value);
   }
-  private _personSubject: BehaviorSubject<PersonViewModel[]> =
-    new BehaviorSubject<PersonViewModel[]>(this._persons);
-  public person$: Observable<PersonViewModel[]> =
-    this._personSubject.asObservable();
+  private _imageUrlSubject: BehaviorSubject<string> =
+    new BehaviorSubject<string>(this._imageUrl);
+  public imageUrl$: Observable<string> = this._imageUrlSubject.asObservable();
 }
 // pliki check 1 and 2 .png files from desktop in directory viewModel
+// HIGHER MODEL IN DUMMY COMPONENT IS SO BAD
+// pytanie w takim wypadku nie mozna zrobić
