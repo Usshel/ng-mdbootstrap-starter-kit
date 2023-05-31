@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { AvatarCardPresentationalComponent } from './avatar-card.presentational-component';
+import { CommonModule } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
-  imports: [],
+  imports: [CommonModule, BrowserModule],
   declarations: [AvatarCardPresentationalComponent],
   providers: [],
-  exports: [AvatarCardPresentationalComponent]
+  exports: [AvatarCardPresentationalComponent],
 })
-export class AvatarCardPresentationalComponentModule {
-}
+export class AvatarCardPresentationalComponentModule {}
