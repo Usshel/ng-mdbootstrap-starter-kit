@@ -1,0 +1,13 @@
+<ul class="avatars">
+  <ng-container *ngFor="let person of person$ | async">
+    <li>
+      <a href="#" data-toggle="tooltip">
+        <img
+          [alt]="person.name + person.secondName"
+          class="avatar"
+          [src]="person.imageUrl"
+        />
+      </a>
+    </li>
+  </ng-container>
+</ul>
