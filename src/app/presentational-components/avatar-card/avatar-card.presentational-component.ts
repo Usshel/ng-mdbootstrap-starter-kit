@@ -2,11 +2,12 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
+  OnChanges,
+  SimpleChanges,
   ViewEncapsulation,
 } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { MembersModel } from 'src/app/models/members.model';
-import { PersonViewModel } from 'src/app/view-models/person/person.view-model';
+import { AvatarCardViewModel } from '../../view-models/avatar-card/avatar-card.view-model';
 
 @Component({
   selector: 'avatar-card-presentational',
@@ -15,20 +16,50 @@ import { PersonViewModel } from 'src/app/view-models/person/person.view-model';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AvatarCardPresentationalComponent {
-  private _persons!: PersonViewModel[];
-  @Input() set persons(value: MembersModel[]) {
-    this._persons! = value.map((member) => ({
-      id: member.id,
-      name: member.firstName,
-      imageUrl: member.avatarUrl,
-      secondName: member.lastName,
-      position: member.position,
-    }));
-    this._personSubject.next(this._persons);
+export class AvatarCardPresentationalComponent implements OnChanges {
+  @Input() imageUrl!: string;
+  @Input() title!: string;
+  @Input() description!: string;
+
+  private _avatarCardSubject: BehaviorSubject<AvatarCardViewModel> =
+    new BehaviorSubject<AvatarCardViewModel>({
+      imageUrl: this.imageUrl,
+      title: this.title,
+      description: this.description,
+    });
+  public avatarCard$: Observable<AvatarCardViewModel> =
+    this._avatarCardSubject.asObservable();
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['imageUrl'] || changes['title'] || changes['description']) {
+      this.setState();
+    }
   }
-  private _personSubject: BehaviorSubject<PersonViewModel[]> =
-    new BehaviorSubject<PersonViewModel[]>(this._persons);
-  public person$: Observable<PersonViewModel[]> =
-    this._personSubject.asObservable();
+  private setState(): void {
+    this._avatarCardSubject.next({
+      imageUrl: this.imageUrl,
+      title: this.title,
+      description: this.description,
+    });
+  }
 }
+
+// this._person! = {
+//   id: value.id,
+//   name: value.firstName,
+//   imageUrl: value.avatarUrl,
+//   secondName: value.lastName,
+//   position: value.position,
+// };
+// this._personSubject.next({
+//   id: value.id,
+//   name: value.firstName,
+//   imageUrl: value.avatarUrl,
+//   secondName: value.lastName,
+//   position: value.position,
+// });
+// }
+// private _personSubject: BehaviorSubject<PersonViewModel> =
+// new BehaviorSubject<PersonViewModel>(this._person);
+// public person$: Observable<PersonViewModel> =
+// this._personSubject.asObservable();
