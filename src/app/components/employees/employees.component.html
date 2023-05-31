@@ -3,3 +3,13 @@
   [description]="'You can browse through employees below'"
 >
 </page-header-presentational>
+<div class="content-list-body row filter-list-1685549285742">
+  <ng-container *ngFor="let employees of employees$ | async">
+    <avatar-card-presentational
+      class="col-6"
+      [imageUrl]="employees.avatarUrl"
+      [title]="employees.firstName + ' ' + employees.lastName"
+      [description]="employees.position"
+    ></avatar-card-presentational>
+  </ng-container>
+</div>
