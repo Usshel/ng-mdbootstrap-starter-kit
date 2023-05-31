@@ -1,0 +1,13 @@
+<ng-container *ngIf="avatarCard$ | async as avatarCard">
+  <a class="media media-member" href="#">
+    <img alt="image" [src]="avatarCard.imageUrl" class="avatar avatar-lg" />
+    <div class="media-body">
+      <h6 class="mb-0 H6-filter-by-text" data-filter-by="text">
+        {{avatarCard.title}}
+      </h6>
+      <span data-filter-by="text" class="text-body SPAN-filter-by-text"
+        >{{avatarCard.description}}</span
+      >
+    </div>
+  </a>
+</ng-container>
