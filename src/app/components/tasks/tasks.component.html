@@ -3,43 +3,42 @@
   [description]="'You can browse through tasks below'"
 >
 </page-header-presentational>
-
-<div class="card card-task">
-  <div class="progress">
-    <div
-      class="progress-bar bg-danger"
-      role="progressbar"
-      style="width: 75%"
-      aria-valuenow="25"
-      aria-valuemin="0"
-      aria-valuemax="100"
-    ></div>
-  </div>
-  <div class="card-body">
-    <div class="card-title">
-      <a href="#">
-        <h6 data-filter-by="text" class="H6-filter-by-text">
-          Client objective meeting
-        </h6>
-      </a>
-      <span class="text-small">Today</span>
+<ng-container *ngFor="let task of tasksWithMembersAndCheckList$ | async">
+  <div class="card card-task">
+    <div class="progress">
+      <div
+        [progressBarState]="task.percentage"
+        [progressBarNotDefault]="true"
+        class="progress-bar"
+        role="progressbar"
+        style="width: 75%"
+        aria-valuenow="25"
+        aria-valuemin="0"
+        aria-valuemax="100"
+      ></div>
     </div>
-    <div class="card-meta">
-      <ul class="avatars">
-        <li>
-          <a href="#" data-toggle="tooltip" title="Kenny">
-            <img
-              alt="Kenny Tran"
-              class="avatar"
-              src="assets/img/avatar-male-6.jpg"
-            />
-          </a>
-        </li>
-      </ul>
-      <div class="d-flex align-items-center">
-        <i class="material-icons">playlist_add_check</i>
-        <span> 3/4 </span>
+    <div class="card-body">
+      <div class="card-title">
+        <a href="#">
+          <h6 data-filter-by="text" class="H6-filter-by-text">
+            {{ task.name }}
+          </h6>
+        </a>
+        <span class="text-small">{{ task.dueDate | date }}</span>
+      </div>
+      <div class="card-meta">
+        <img-overlap-list-presentational
+          [persons]="task.members"
+        ></img-overlap-list-presentational>
+        <div class="d-flex align-items-center">
+          <i class="material-icons">playlist_add_check</i>
+          <span>
+            {{ task.checkListItems | checkListItemsDone | length }}/{{
+              task.checkListItems | length
+            }}
+          </span>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</ng-container>
