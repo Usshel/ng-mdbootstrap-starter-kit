@@ -27,9 +27,13 @@
         <span class="text-small">{{ task.dueDate | date }}</span>
       </div>
       <div class="card-meta">
-        <img-overlap-list-presentational
-          [persons]="task.members"
-        ></img-overlap-list-presentational>
+        <ul class="avatars">
+          <ng-container *ngFor="let member of task.members">
+            <img-overlap-list-presentational
+              [imageUrl]="member.avatarUrl"
+            ></img-overlap-list-presentational>
+          </ng-container>
+        </ul>
         <div class="d-flex align-items-center">
           <i class="material-icons">playlist_add_check</i>
           <span>
