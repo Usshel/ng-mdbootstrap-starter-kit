@@ -6,6 +6,7 @@ import {
 import { Observable } from 'rxjs';
 import { MembersModel } from '../../models/members.model';
 import { TeamsService } from '../../services/teams.service';
+import { EmployeesService } from '../../services/employees.service';
 
 @Component({
   selector: 'app-employees',
@@ -16,7 +17,6 @@ import { TeamsService } from '../../services/teams.service';
 })
 export class EmployeesComponent {
   readonly employees$: Observable<MembersModel[]> =
-    this._teamsService.getAllEmployes();
-
-  constructor(private _teamsService: TeamsService) {}
+    this._employeesService.getAllEmployes();
+  constructor(private _employeesService: EmployeesService) {}
 }

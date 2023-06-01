@@ -6,6 +6,7 @@ import {
 import { Observable, map } from 'rxjs';
 import { ProjectModel } from '../../models/project.model';
 import { TeamsService } from '../../services/teams.service';
+import { ProjectsService } from '../../services/projects.service';
 
 @Component({
   selector: 'app-projects',
@@ -15,9 +16,9 @@ import { TeamsService } from '../../services/teams.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProjectsComponent {
-  readonly projects$: Observable<ProjectModel[]> = this._teamsService
+  readonly projects$: Observable<ProjectModel[]> = this._projectsService
     .getAllProjects()
     .pipe(map((projects) => projects));
 
-  constructor(private _teamsService: TeamsService) {}
+  constructor(private _projectsService: ProjectsService) {}
 }
