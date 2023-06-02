@@ -3,12 +3,18 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { Observable, combineLatest, map } from 'rxjs';
-import { TaskModel } from '../../models/task.model';
-import { MembersModel } from '../../models/members.model';
+import { Observable, combineLatest } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { ChecklistItemModel } from '../../models/checklist-item.model';
+import { MembersModel } from '../../models/members.model';
+import { TasksWithMembersAndCheckListQueryModel } from '../../query-models/tasks-with-members-and-check-list.query-model';
+import { TaskModel } from '../../models/task.model';
 import { TeamsService } from '../../services/teams.service';
-import { TasksWithMembersAndCheckListQueryModel } from 'src/app/query-models/tasks-with-members-and-check-list.query-model';
+import { CheckListItemsService } from '../../services/check-list-items.service';
+import { EmployeesService } from '../../services/employees.service';
+import { TasksService } from '../../services/tasks.service';
+import { AvatarCardViewModel } from 'src/app/view-models/avatar-card/avatar-card.view-model';
+import { AvatarOverlapListViewModel } from 'src/app/view-models/avatar-overlap-list/avatar-overlap-list.view-model';
 
 @Component({
   selector: 'app-tasks',
@@ -18,25 +24,30 @@ import { TasksWithMembersAndCheckListQueryModel } from 'src/app/query-models/tas
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TasksComponent {
-  readonly tasks$: Observable<TaskModel[]> = this._teamsService.getAllTasks();
+  readonly checkList$: Observable<ChecklistItemModel[]> =
+    this._checkListItemsService.getAllChecklistItems();
+
+  readonly tasks$: Observable<TaskModel[]> = this._tasksService.getAllTasks();
 
   readonly members$: Observable<MembersModel[]> =
-    this._teamsService.getAllEmployes();
-
-  readonly checkList$: Observable<ChecklistItemModel[]> =
-    this._teamsService.getAllChecklistItems();
+    this._employeesService.getAllEmployes();
 
   tasksWithMembersAndCheckList$: Observable<
     TasksWithMembersAndCheckListQueryModel[]
   > = combineLatest([this.tasks$, this.members$, this.checkList$]).pipe(
     map(([tasks, members, checklist]) =>
-      this.MapToTasksWithMembersAndCheckList(tasks, members, checklist)
+      this._mapToTasksWithMembersAndCheckList(tasks, members, checklist)
     )
   );
 
-  constructor(private _teamsService: TeamsService) {}
+  constructor(
+    private _teamsService: TeamsService,
+    private _checkListItemsService: CheckListItemsService,
+    private _employeesService: EmployeesService,
+    private _tasksService: TasksService
+  ) {}
 
-  MapToTasksWithMembersAndCheckList(
+  private _mapToTasksWithMembersAndCheckList(
     tasks: TaskModel[],
     members: MembersModel[],
     checkList: ChecklistItemModel[]
@@ -55,7 +66,10 @@ export class TasksComponent {
       description: task.description,
       startDate: task.startDate,
       dueDate: task.dueDate,
-      members: task.assigneeIds.map((id) => membersMap[id]),
+      members: task.assigneeIds.map((id) => ({
+        id: membersMap[id].id,
+        imageUrl: membersMap[id].avatarUrl,
+      })),
       checkListItems: task.checkList.map((item) => checklistMap[item]),
       projectId: task.projectId,
       id: task.id,
@@ -66,3 +80,9 @@ export class TasksComponent {
     }));
   }
 }
+
+// tasksCompleted: task.checkList.filter((item) => item.isDone === true);
+// ({
+//   id: membersMap[id].id,
+//   imageUrl: membersMap[id].avatarUrl,
+// })
