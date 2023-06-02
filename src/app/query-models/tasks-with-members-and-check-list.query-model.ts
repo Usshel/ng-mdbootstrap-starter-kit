@@ -1,18 +1,13 @@
 import { ChecklistItemModel } from '../models/checklist-item.model';
 import { MembersModel } from '../models/members.model';
+import { AvatarQueryModel } from './avatar.query-model';
 
 export interface TasksWithMembersAndCheckListQueryModel {
   readonly name: string;
   readonly description: string;
   readonly startDate: number;
   readonly dueDate: number;
-  readonly members: {
-    readonly id: string;
-    readonly firstName: string;
-    readonly avatarUrl: string;
-    readonly lastName: string;
-    readonly position: string;
-  }[];
+  readonly members: AvatarQueryModel[];
   readonly checkListItems: {
     readonly name: string;
     readonly isDone: boolean;
@@ -22,3 +17,4 @@ export interface TasksWithMembersAndCheckListQueryModel {
   readonly id: string;
   readonly percentage: number;
 }
+// AvatarQueryModel[]
