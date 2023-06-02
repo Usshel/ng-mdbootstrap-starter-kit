@@ -1,0 +1,46 @@
+<page-header-presentational
+  [title]="'Welcome to our software!'"
+  [description]="'Select a team below to get started'"
+>
+</page-header-presentational>
+<div
+  class="tab-pane fade show active"
+  id="teams"
+  role="tabpanel"
+  data-filter-list="content-list-body"
+>
+  <div class="row content-list-head">
+    <div class="col-auto">
+      <h3>Teams</h3>
+    </div>
+  </div>
+  <!--end of content list head-->
+  <div class="content-list-body row filter-list-1685562548394">
+    <ng-container *ngFor="let team of teams$ | async">
+      <simple-card-presentational
+        class="col-lg-6"
+        [title]="team.name"
+        [description]="
+          (team.projects | length) +
+          ' Projects, ' +
+          (team.members | length) +
+          ' Members'
+        "
+      >
+      </simple-card-presentational>
+    </ng-container>
+    <div class="col-auto">
+      <h3>Members</h3>
+      <div class="content-list-body row filter-list-1685549285742">
+        <ng-container *ngFor="let employees of employees$ | async">
+          <avatar-card-presentational
+            class="col-6"
+            [imageUrl]="employees.avatarUrl"
+            [title]="employees.firstName + ' ' + employees.lastName"
+            [description]="employees.position"
+          ></avatar-card-presentational>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
