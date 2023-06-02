@@ -1,14 +1,15 @@
 <div class="layout layout-nav-side">
-    <navbar-side-presentational></navbar-side-presentational>
-    <div class="main-container">
-        <header-presentational></header-presentational>
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-11 col-xl-10">
-                    <router-outlet></router-outlet>
-                </div>
-            </div>
+  <navbar-side-presentational
+    class="navbar navbar-expand-lg bg-dark navbar-dark sticky-top"
+  ></navbar-side-presentational>
+  <div class="main-container">
+    <header-presentational></header-presentational>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-11 col-xl-10">
+          <router-outlet></router-outlet>
         </div>
-        
+      </div>
     </div>
+  </div>
 </div>
