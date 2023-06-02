@@ -6,7 +6,7 @@ import { ProgressBarDirectiveModule } from 'src/app/directives/progress-bar/prog
 import { CommonModule } from '@angular/common';
 import { CheckListItemsDonePipeModule } from '../../pipes/check-list-items-done/check-list-items-done.pipe-module';
 import { LengthPipeModule } from '../../pipes/length/length.pipe-module';
-import { ImgOverlapListPresentationalComponentModule } from 'src/app/presentational-components/img-overlap-list/img-overlap-list.presentational-component-module';
+import { AvatarOverlappingListPresentationalComponentModule } from 'src/app/presentational-components/avatar-overlapping-list/avatar-overlapping-list.presentational-component-module';
 
 @NgModule({
   declarations: [TasksComponent],
@@ -19,7 +19,7 @@ import { ImgOverlapListPresentationalComponentModule } from 'src/app/presentatio
     CommonModule,
     CheckListItemsDonePipeModule,
     LengthPipeModule,
-    ImgOverlapListPresentationalComponentModule,
+    AvatarOverlappingListPresentationalComponentModule,
   ],
 })
 export class TasksComponentModule {}
