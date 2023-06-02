@@ -31,7 +31,9 @@
       "service": ["CONSTRUCTOR"],
       "elementRef": ["CONSTRUCTOR"],
       "renderer2": ["CONSTRUCTOR"],
-      "httpClient": ["CONSTRUCTOR"]
+      "httpClient": ["CONSTRUCTOR"],
+      "router": ["CONSTRUCTOR"],
+      "activatedRoute": ["CONSTRUCTOR"]
     }
   },
   "external": {
