@@ -20,18 +20,24 @@ export class AvatarCardPresentationalComponent implements OnChanges {
   @Input() imageUrl!: string;
   @Input() title!: string;
   @Input() description!: string;
-
+  @Input() id!: string;
   private _avatarCardSubject: BehaviorSubject<AvatarCardViewModel> =
     new BehaviorSubject<AvatarCardViewModel>({
       imageUrl: this.imageUrl,
       title: this.title,
       description: this.description,
+      id: this.id,
     });
   public avatarCard$: Observable<AvatarCardViewModel> =
     this._avatarCardSubject.asObservable();
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['imageUrl'] || changes['title'] || changes['description']) {
+    if (
+      changes['imageUrl'] ||
+      changes['title'] ||
+      changes['description'] ||
+      changes['id']
+    ) {
       this.setState();
     }
   }
@@ -40,6 +46,7 @@ export class AvatarCardPresentationalComponent implements OnChanges {
       imageUrl: this.imageUrl,
       title: this.title,
       description: this.description,
+      id: this.id,
     });
   }
 }
