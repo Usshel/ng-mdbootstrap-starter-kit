@@ -1,0 +1,54 @@
+<!-- 
+  <page-header-presentational
+    [title]="pageTeam.name"
+    [description]="pageTeam.description"
+  >
+    <avatar-overlapping-list-presentational
+      additionalInformation
+      [avatars]="pageTeam.employees"
+    ></avatar-overlapping-list-presentational>
+  </page-header-presentational> -->
+
+<ng-container *ngIf="pageTeamWithAvatars$ | async as pageTeam">
+  <div class="page-header">
+    <h3>{{ pageTeam.name }}</h3>
+    <p class="lead">{{ pageTeam.description }}</p>
+    <avatar-overlapping-list-presentational
+      additionalInformation
+      [avatars]="pageTeam.employees"
+    ></avatar-overlapping-list-presentational>
+  </div>
+  <hr />
+  <ul class="nav nav-tabs nav-fill" role="tablist">
+    <li class="nav-item">
+      <a
+        class="nav-link active"
+        data-toggle="tab"
+        role="tab"
+        aria-controls="projects"
+        aria-selected="true"
+        >Projects</a
+      >
+    </li>
+  </ul>
+  <div class="tab-content">
+    <div class="row content-list-head">
+      <div class="col-auto">
+        <h3>Projects</h3>
+      </div>
+    </div>
+    <div class="content-list-body row filter-list-1685378888553">
+      <ng-container *ngFor="let pageTeamProjects of pageTeam.projects">
+        <project-card-presentational
+          hoverPointer
+          class="col-lg-6"
+          [title]="pageTeamProjects.name"
+        >
+          <span additionalInformation>
+            Due on {{ pageTeamProjects.dueDate | date }}
+          </span>
+        </project-card-presentational>
+      </ng-container>
+    </div>
+  </div>
+</ng-container>
