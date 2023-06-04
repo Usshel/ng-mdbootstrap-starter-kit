@@ -32,7 +32,7 @@ export class TasksComponent {
   readonly members$: Observable<MembersModel[]> =
     this._employeesService.getAllEmployes();
 
-  tasksWithMembersAndCheckList$: Observable<
+  readonly tasksWithMembersAndCheckList$: Observable<
     TasksWithMembersAndCheckListQueryModel[]
   > = combineLatest([this.tasks$, this.members$, this.checkList$]).pipe(
     map(([tasks, members, checklist]) =>
@@ -41,7 +41,6 @@ export class TasksComponent {
   );
 
   constructor(
-    private _teamsService: TeamsService,
     private _checkListItemsService: CheckListItemsService,
     private _employeesService: EmployeesService,
     private _tasksService: TasksService
@@ -52,7 +51,6 @@ export class TasksComponent {
     members: MembersModel[],
     checkList: ChecklistItemModel[]
   ): TasksWithMembersAndCheckListQueryModel[] {
-    //change to queryModel!!!!!!!!!!!!!!!!!!!!!!!!!!!
     const membersMap = members.reduce((a, c) => {
       return { ...a, [c.id]: c };
     }, {}) as Record<string, MembersModel>;
@@ -80,9 +78,3 @@ export class TasksComponent {
     }));
   }
 }
-
-// tasksCompleted: task.checkList.filter((item) => item.isDone === true);
-// ({
-//   id: membersMap[id].id,
-//   imageUrl: membersMap[id].avatarUrl,
-// })
