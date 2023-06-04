@@ -1,4 +1,8 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+} from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { TeamModel } from '../../models/team.model';
 import { TeamsService } from '../../services/teams.service';
@@ -7,11 +11,12 @@ import { TeamsService } from '../../services/teams.service';
   selector: 'app-teams',
   templateUrl: './teams.component.html',
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TeamsComponent {
-  readonly teams$: Observable<TeamModel[]> = this._teamsService.getAllTeams().pipe(map((teams) => teams));
+  readonly teams$: Observable<TeamModel[]> = this._teamsService
+    .getAllTeams()
+    .pipe(map((teams) => teams));
 
-  constructor(private _teamsService: TeamsService) {
-  }
+  constructor(private _teamsService: TeamsService) {}
 }
