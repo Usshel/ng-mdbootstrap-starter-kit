@@ -17,4 +17,3 @@ export interface TasksWithMembersAndCheckListQueryModel {
   readonly id: string;
   readonly percentage: number;
 }
-// AvatarQueryModel[]
