@@ -4,6 +4,9 @@ import { PageHeaderPresentationalComponentModule } from 'src/app/presentational-
 import { AvatarCardPresentationalComponentModule } from 'src/app/presentational-components/avatar-card/avatar-card.presentational-component-module';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
+import { EmployeeLinkDirectiveModule } from 'src/app/directives/employee-link/employee-link.directive-module';
+import { PointerDirectiveModule } from 'src/app/directives/pointer/pointer.directive-module';
+import { CardPresentationalComponentModule } from 'src/app/presentational-components/card/card.presentational-component-module';
 
 @NgModule({
   imports: [
@@ -11,6 +14,8 @@ import { BrowserModule } from '@angular/platform-browser';
     BrowserModule,
     PageHeaderPresentationalComponentModule,
     AvatarCardPresentationalComponentModule,
+    EmployeeLinkDirectiveModule,
+    PointerDirectiveModule,
   ],
   declarations: [EmployeesComponent],
   providers: [],
