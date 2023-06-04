@@ -18,6 +18,8 @@
   <div class="content-list-body row filter-list-1685562548394">
     <ng-container *ngFor="let team of teams$ | async">
       <simple-card-presentational
+        hoverPointer
+        [teamLink]="team.id"
         class="col-lg-6"
         [title]="team.name"
         [description]="
@@ -34,6 +36,8 @@
       <div class="content-list-body row filter-list-1685549285742">
         <ng-container *ngFor="let employees of employees$ | async">
           <avatar-card-presentational
+            [employeeLink]="employees.id"
+            hoverPointer
             class="col-6"
             [imageUrl]="employees.avatarUrl"
             [title]="employees.firstName + ' ' + employees.lastName"
