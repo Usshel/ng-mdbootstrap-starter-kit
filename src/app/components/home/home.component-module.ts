@@ -6,6 +6,9 @@ import { LengthPipeModule } from 'src/app/pipes/length/length.pipe-module';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { AvatarCardPresentationalComponentModule } from 'src/app/presentational-components/avatar-card/avatar-card.presentational-component-module';
+import { EmployeeLinkDirectiveModule } from 'src/app/directives/employee-link/employee-link.directive-module';
+import { PointerDirectiveModule } from 'src/app/directives/pointer/pointer.directive-module';
+import { TeamLinkDirectiveModule } from 'src/app/directives/team-link/team-link.directive-module';
 
 @NgModule({
   imports: [
@@ -15,6 +18,9 @@ import { AvatarCardPresentationalComponentModule } from 'src/app/presentational-
     CommonModule,
     BrowserModule,
     AvatarCardPresentationalComponentModule,
+    EmployeeLinkDirectiveModule,
+    PointerDirectiveModule,
+    TeamLinkDirectiveModule,
   ],
   declarations: [HomeComponent],
   providers: [],
