@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { CheckListItemsDonePipeModule } from '../../pipes/check-list-items-done/check-list-items-done.pipe-module';
 import { LengthPipeModule } from '../../pipes/length/length.pipe-module';
 import { AvatarOverlappingListPresentationalComponentModule } from 'src/app/presentational-components/avatar-overlapping-list/avatar-overlapping-list.presentational-component-module';
+import { DateInSecondsToDateInMsPipeModule } from 'src/app/pipes/date-in-seconds-to-date-in-ms/date-in-seconds-to-date-in-ms.pipe-module';
 
 @NgModule({
   declarations: [TasksComponent],
@@ -20,6 +21,7 @@ import { AvatarOverlappingListPresentationalComponentModule } from 'src/app/pres
     CheckListItemsDonePipeModule,
     LengthPipeModule,
     AvatarOverlappingListPresentationalComponentModule,
+    DateInSecondsToDateInMsPipeModule,
   ],
 })
 export class TasksComponentModule {}

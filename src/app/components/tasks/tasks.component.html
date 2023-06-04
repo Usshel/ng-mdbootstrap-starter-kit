@@ -24,7 +24,9 @@
             {{ task.name }}
           </h6>
         </a>
-        <span class="text-small">Due on {{ task.dueDate | date }}</span>
+        <span class="text-small"
+          >Due on {{ task.dueDate | dateInSecondsToDateInMS | date }}</span
+        >
       </div>
       <div class="card-meta">
         <avatar-overlapping-list-presentational
