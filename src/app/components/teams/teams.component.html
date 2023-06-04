@@ -8,11 +8,12 @@
         >
         </page-header-presentational>
       </div>
-
       <!-- start of card component -->
       <div class="content-list-body row filter-list-1685378888553">
         <ng-container *ngFor="let team of teams$ | async">
           <simple-card-presentational
+            hoverPointer
+            [teamLink]="team.id"
             class="col-lg-6"
             [title]="team.name"
             [description]="
