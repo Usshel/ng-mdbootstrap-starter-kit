@@ -1,0 +1,13 @@
+<div class="card card-project">
+  <!-- ng-content for progress bar --><ng-content
+    select="[progressBar]"
+  ></ng-content>
+  <div class="card-body">
+    <div class="card-title">
+      <a><h5 data-filter-by="text" class="H5-filter-by-text">{{title}}</h5></a>
+      <span>{{description}}</span>
+    </div>
+    <!-- img-overlap-list ng-content -->
+    <ng-content select="[additionalInformation]"></ng-content>
+  </div>
+</div>
