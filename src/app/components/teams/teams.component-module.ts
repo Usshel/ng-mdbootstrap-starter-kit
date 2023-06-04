@@ -4,6 +4,8 @@ import { PageHeaderPresentationalComponentModule } from 'src/app/presentational-
 import { CardPresentationalComponentModule } from 'src/app/presentational-components/card/card.presentational-component-module';
 import { CommonModule } from '@angular/common';
 import { LengthPipeModule } from 'src/app/pipes/length/length.pipe-module';
+import { PointerDirectiveModule } from 'src/app/directives/pointer/pointer.directive-module';
+import { TeamLinkDirectiveModule } from 'src/app/directives/team-link/team-link.directive-module';
 
 @NgModule({
   declarations: [TeamsComponent],
@@ -14,6 +16,8 @@ import { LengthPipeModule } from 'src/app/pipes/length/length.pipe-module';
     PageHeaderPresentationalComponentModule,
     CardPresentationalComponentModule,
     LengthPipeModule,
+    PointerDirectiveModule,
+    TeamLinkDirectiveModule,
   ],
 })
 export class TeamsComponentModule {}
