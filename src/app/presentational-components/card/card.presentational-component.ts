@@ -14,5 +14,5 @@ import {
 })
 export class CardPresentationalComponent {
   @Input() title: string = 'title';
-  @Input() description: string = 'description';
+  @Input() description!: string;
 }
