@@ -1,0 +1,122 @@
+<div class="container">
+  <ng-container *ngIf="pageEmployee$ | async as pageEmployee">
+    <div class="page-header mb-4">
+      <div class="media">
+        <img
+          alt="Image"
+          [src]="pageEmployee.avatarUrl"
+          class="avatar avatar-lg mt-1"
+        />
+        <div class="media-body ml-3">
+          <h1 class="mb-0">
+            {{ pageEmployee.firstName }} {{ pageEmployee.lastName }}
+          </h1>
+          <p class="lead">{{ pageEmployee.position }}</p>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <ul class="nav nav-tabs nav-fill" role="tablist">
+    <li class="nav-item">
+      <a
+        type="button"
+        (click)="onClickToggleTeams()"
+        [ngClass]="(tabSwitcher$ | async) ? 'nav-link active show' : 'nav-link'"
+        data-toggle="tab"
+        role="tab"
+        aria-controls="teams"
+        aria-selected="true"
+        >Teams</a
+      >
+    </li>
+    <li class="nav-item">
+      <a
+        type="button"
+        (click)="onClickToggleProjects()"
+        [ngClass]="(tabSwitcher$ | async) ? 'nav-link' : 'nav-link active show'"
+        data-toggle="tab"
+        role="tab"
+        aria-controls="projects"
+        aria-selected="false"
+        >Projects</a
+      >
+    </li>
+  </ul>
+
+  <ng-container *ngIf="tabSwitcher$ | async; else projects">
+    <div class="tab-content">
+      <div
+        class="tab-pane fade show active"
+        id="projects"
+        role="tabpanel"
+        data-filter-list="content-list-body"
+      >
+        <div class="row content-list-head">
+          <div class="col-auto">
+            <h3>Teams</h3>
+          </div>
+        </div>
+        <div class="content-list-body row filter-list-1685378888553">
+          <ng-container *ngFor="let team of teamsWithMappedEmployees$ | async">
+            <simple-card-presentational
+              hoverPointer
+              [teamLink]="team.id"
+              class="col-lg-6"
+              [title]="team.name"
+              [description]="
+                (team.projects | length) +
+                ' Projects, ' +
+                (team.members | length) +
+                ' Members'
+              "
+            >
+              <avatar-overlapping-list-presentational
+                additionalInformation
+                [avatars]="team.employees"
+              ></avatar-overlapping-list-presentational>
+            </simple-card-presentational>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>
+
+<ng-template #projects>
+  <div
+    class="tab-pane fade show active"
+    id="projects"
+    role="tabpanel"
+    data-filter-list="content-list-body"
+  >
+    <div class="row content-list-head">
+      <div class="col-auto">
+        <h3>Projects</h3>
+      </div>
+    </div>
+  </div>
+  <div class="content-list-body row filter-list-1685378888553">
+    <ng-container *ngIf="projectsWithChecklist$ | async as employeeProjects">
+      <ng-container *ngFor="let employeeProject of employeeProjects">
+        <simple-card-presentational
+          class="col-lg-6"
+          [title]="employeeProject.name"
+        >
+          <div
+            class="card-meta d-flex justify-content-between"
+            additionalInformation
+          >
+            <div class="d-flex align-items-center">
+              <i class="material-icons mr-1">playlist_add_check</i>
+            </div>
+            <span class="text-small SPAN-filter-by-text" data-filter-by="text">
+              Due
+              {{ employeeProject.dueDate | fromCurrentDateToDate }} days</span
+            >
+          </div>
+        </simple-card-presentational>
+      </ng-container>
+    </ng-container>
+  </div>
+</ng-template>
