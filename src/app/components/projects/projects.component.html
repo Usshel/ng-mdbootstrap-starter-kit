@@ -7,11 +7,8 @@
 <!-- start of card component -->
 <div class="content-list-body row filter-list-1685378888553">
   <ng-container *ngFor="let project of projects$ | async">
-    <simple-card-presentational
-      class="col-lg-6"
-      [title]="project.name"
-      [description]="'Due on ' + (project.dueDate | date)"
-    >
+    <project-card-presentational class="col-lg-6" [title]="project.name">
+      <span additionalInformation> Due on {{ project.dueDate | date }} </span>
       <div class="progress" progressBar>
         <div
           [progressBarState]="project.percentage"
@@ -24,7 +21,7 @@
           aria-valuemax="100"
         ></div>
       </div>
-    </simple-card-presentational>
+    </project-card-presentational>
   </ng-container>
 </div>
 <!-- end of card component  -->
